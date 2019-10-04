@@ -45,11 +45,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        hode = null;
-        hale= null;
-        antall=0;
-        endringer=0;
-
         //throw new NotImplementedException();
     }
 
@@ -74,6 +69,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 if (hode == null) {
                     Node<T> node = new Node<T>(a[i]);
                     hode = node;
+                    hale = node;
                     hode.forrige = null;
                     hode.neste = null;
                     tmp = node;
@@ -85,17 +81,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     node.forrige = tmp;
                     tmp.neste = node;
                     tmp = node;
+                    hale = node;
                     antall++;
                 }
             }
 
         }
-        //for å finne det siste noden i listen og sette den lik hale
-        Node ptn = hode;
-        while(ptn != null){
-            ptn = ptn.neste;
-        }
-        hale=ptn;
 
     }
 
@@ -117,17 +108,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-       Objects.requireNonNull(verdi);
+      if(verdi == null){
+          throw new NullPointerException("Ma ha en verdi");
+      }
        //listen er tom
-       if(antall==0){
-           Node nynode = new Node(verdi);
-           hode = hale = null;
+       if(tom()){
+           Node<T> nynode = new Node<T>(verdi);
+           hode = hale = nynode;
            antall++;
            endringer++;
            return true;
        }else {
            //noden leeges i slutten av listen
-           Node nynode = new Node(verdi);
+           Node<T> nynode = new Node<T>(verdi);
            Node gammel_siste = hale;
            //neste for gammel var null
            gammel_siste.neste = nynode;
@@ -176,29 +169,50 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new NotImplementedException();
+        Node start = hode;
+        start.verdi = null;
+        start = start.neste;
+        while(start.neste!=null){
+            start.forrige.neste = null;
+            start.forrige = null;
+            start.verdi = null;
+            start = start.neste;
+        }
+        start.verdi = null;
+        start.forrige.neste = null;
+        start.forrige = null;
+        System.out.println(hale.verdi +"  "+ hode.verdi);
+
+        //throw new NotImplementedException();
+
     }
 
     @Override
     public String toString() {
+        if (tom() || hode == null){
+            return "[]";
+        }
         Node forste = hode;
-        String ut = "["+forste.verdi;
+        StringBuilder ut = new StringBuilder("["+forste.verdi);
         forste = forste.neste;
         while(forste != null){
-            ut+=", "+forste.verdi;
+            ut.append(", "+forste.verdi);
             forste = forste.neste;
         }
-        ut+="]";
-        return ut;
+        ut.append("]");
+        return ut.toString();
     }
 
     public String omvendtString() {
+        if (tom() || hode == null){
+            return "[]";
+        }
         Node sist = hale;
         String ut = "["+sist.verdi;
-        sist = sist.neste;
+        sist = sist.forrige;
         while(sist != null){
             ut+=", "+sist.verdi;
-            sist = sist.neste;
+            sist = sist.forrige;
         }
         ut+="]";
         return ut;
