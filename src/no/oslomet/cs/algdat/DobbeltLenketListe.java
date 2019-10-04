@@ -248,6 +248,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new NotImplementedException();
     }
 
+    ////////////////Oppgave 3a///////////////
+
+    private Node<T> finnNode(int indeks){
+
+
+        return null;
+
+    }
+
+    /*
+     public T hent(int indeks){
+
+
+     }
+
+
+     T opddater(int indeks, Tnyverdi){
+
+     }
+
+
+     */
+
 } // class DobbeltLenketListe
 
 
