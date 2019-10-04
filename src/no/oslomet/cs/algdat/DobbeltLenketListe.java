@@ -49,7 +49,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new NotImplementedException();
+        if (a == null) {
+            throw new NullPointerException("tabellen er tom");
+
+        }
+        Node<T> tmp = null;
+
+        for (Integer i = 0; i < a.length; i++) {
+            if (a.length == 1) {
+                if (a[i] != null) {
+                    Node<T> node = new Node<T>(a[i]);
+                    hode = node;
+                    hale = node;
+                    antall++;
+                }
+            } else if (a[i] != null) {
+                if (hode == null) {
+                    Node<T> node = new Node<T>(a[i]);
+                    hode = node;
+                    hode.forrige = null;
+                    hode.neste = null;
+                    tmp = node;
+                    antall++;
+                }
+
+                else {
+                    Node<T> node = new Node<T>(a[i]);
+                    node.forrige = tmp;
+                    tmp.neste = node;
+                    tmp = node;
+                    antall++;
+                }
+            }
+
+        }
+        Node ptn = hode;
+        while(ptn != null){
+            ptn = ptn.neste;
+        }
+        hale=ptn;
+
     }
 
     public Liste<T> subliste(int fra, int til){
