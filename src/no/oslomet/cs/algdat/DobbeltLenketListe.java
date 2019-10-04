@@ -54,10 +54,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
+        //dersom arrayen er tom kastes et unntak
         if (a == null) {
             throw new NullPointerException("tabellen er tom");
 
         }
+        //Dette er en peker, som ble brukt til å sette neste og forige node.
         Node<T> tmp = null;
 
         for (Integer i = 0; i < a.length; i++) {
@@ -88,6 +90,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
 
         }
+        //for å finne det siste noden i listen og sette den lik hale
         Node ptn = hode;
         while(ptn != null){
             ptn = ptn.neste;
