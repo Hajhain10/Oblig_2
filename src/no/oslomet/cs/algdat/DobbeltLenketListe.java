@@ -177,21 +177,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             start.forrige = null;
             start.verdi = null;
             start = start.neste;
+            endringer++;
         }
         start.verdi = null;
         start.forrige.neste = null;
         start.forrige = null;
+        hode.verdi = null;
+        antall = 0;
         System.out.println(hale.verdi +"  "+ hode.verdi);
 
-        //throw new NotImplementedException();
-
+        /*
+        {
+            Node starten = hode;
+            int hjelpeverdi = 0;
+            while(starten.neste!=null){
+                fjern(hjelpeverdi);
+                hjelpeverdi++;
+                endringer++;
+            }
+            fjern(hjelpeverdi);
+            hode.verdi = null;
+            antall = 0;
+        }
+*/
     }
 
     @Override
     public String toString() {
-        if (tom() || hode == null){
+        if (tom()){
+            return "[]";
+        }else if(hode.verdi == null){
             return "[]";
         }
+
         Node forste = hode;
         StringBuilder ut = new StringBuilder("["+forste.verdi);
         forste = forste.neste;
@@ -204,7 +222,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public String omvendtString() {
-        if (tom() || hode == null){
+        if (tom()){
+            return "[]";
+        }else if(hode.verdi == null){
             return "[]";
         }
         Node sist = hale;
