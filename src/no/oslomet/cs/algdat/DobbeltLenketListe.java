@@ -144,7 +144,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new NotImplementedException();
+        
+        indeksKontroll(indeks,false);
+        return finnNode(indeks).verdi;
     }
 
     @Override
@@ -286,24 +288,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     private Node<T> finnNode(int indeks){
 
+        Node<T> p = hode;
+        Node<T> q = hale;
 
+        // Hvis indeks er større starter vi ved hode
+        if(indeks > (antall/2)){
+
+            for(int i =0; i < indeks; i++){
+
+                p = p.neste;
+                return p;
+
+            }
+
+        }
+
+        // Hvis indeks er mindre starter vi ved halen
+        if(indeks < (antall/2)){
+
+            for(int i =0; i < indeks; i++){
+
+                q = q.forrige;
+                return q;
+
+            }
+
+        }
+
+        // Om vi ikke finnner gir vi tilbake null
         return null;
 
     }
 
-    /*
-     public T hent(int indeks){
 
-
-     }
-
-
-     T opddater(int indeks, Tnyverdi){
-
-     }
-
-
-     */
 
 } // class DobbeltLenketListe
 
