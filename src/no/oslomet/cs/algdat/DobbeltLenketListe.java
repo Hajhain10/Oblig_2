@@ -266,6 +266,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public boolean hasNext(){
             throw new NotImplementedException();
+
         }
 
         @Override
@@ -275,6 +276,40 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove(){
+         /* //oppgave 9
+
+           if(!fjernOK){
+              throw new IllegalStateException();
+          }
+           if(endringer != antall){
+               new ConcurrentModificationException();
+           }
+            fjernOK = false;
+             Node <T> p = null;
+
+            if (antall == 1)    // bare en node i listen
+            {
+                hode = hale = null;
+            }
+           else if(denne == null){
+             hale= denne.forrige;
+             p=denne.forrige;
+             p.neste=null;
+            }
+           else if(denne.forrige==hode){
+                hode=denne;
+                p=denne;
+                p.forrige=null;
+            }
+           else{
+                p = denne.forrige;  // p skal fjernes
+                p.forrige.neste = p.neste;
+                p.neste.forrige = p.forrige;
+            }
+
+           iteratorendringer++;
+           endringer++;
+           antall--;*/
             throw new NotImplementedException();
         }
 
