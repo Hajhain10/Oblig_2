@@ -90,9 +90,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
-    public Liste<T> subliste(int fra, int til){
-        throw new NotImplementedException();
+    ////////////////Oppgave 3a///////////////
+    private void fratilKontroll(int fra, int til, int antall){
+        if(fra < 0){
+            throw new IndexOutOfBoundsException("fra ma være storre enn 0");
+        }
+        if(til > antall){
+            throw new IndexOutOfBoundsException("til kan ikke være større enn antall");
+        }
+        if(fra>til){
+            throw new IllegalArgumentException("fra kan ikke vaere storre enn til");
+        }
     }
+    public Liste<T> subliste(int fra, int til){
+        fratilKontroll(fra,til,antall);
+        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
+        if(tom()){
+            return subliste;
+        }
+        Node p = hode;
+        for(int i = 0; i<til; i++){
+            if(i >= fra){
+                subliste.leggInn((T) p.verdi);
+            }
+            p = p.neste;
+        }
+        return subliste;
+    }
+
 
     @Override
     public int antall() {
@@ -144,7 +169,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        
+
         indeksKontroll(indeks,false);
         return finnNode(indeks).verdi;
     }
@@ -154,9 +179,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new NotImplementedException();
     }
 
+    ////////////////Oppgave 3a///////////////
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new NotImplementedException();
+
+        if(nyverdi == null){
+            throw new NullPointerException("Ny verdi kan ikke være null");
+        }
+        indeksKontroll(indeks, false);
+
+        Node p = finnNode(indeks);
+        T gammel = (T) p.verdi;
+
+        p.verdi = nyverdi;
+        return gammel;
+
     }
 
     @Override
@@ -320,40 +357,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     ////////////////Oppgave 3a///////////////
-
     private Node<T> finnNode(int indeks){
 
-        Node<T> p = hode;
-        Node<T> q = hale;
 
         // Hvis indeks er større starter vi ved hode
-        if(indeks > (antall/2)){
-
+        if(indeks <= (antall/2)){
+            Node p = hode;
             for(int i =0; i < indeks; i++){
-
                 p = p.neste;
-                return p;
-
             }
-
+            return p;
         }
 
         // Hvis indeks er mindre starter vi ved halen
-        if(indeks < (antall/2)){
-
-            for(int i =0; i < indeks; i++){
-
+       else{
+            Node q = hale;
+            int tmp = antall - indeks;
+            for(int i = antall; i <= tmp; i--){
                 q = q.forrige;
-                return q;
-
             }
-
+            return q;
         }
 
-        // Om vi ikke finnner gir vi tilbake null
-        return null;
-
     }
+
 
 
 
