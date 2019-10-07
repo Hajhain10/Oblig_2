@@ -9,6 +9,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 ////////////Oppgave1///////////////////////////////////
@@ -149,11 +150,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
            endringer++;
            return true;
        }
-    }
-
-    @Override
-    public void leggInn(int indeks, T verdi) {
-        throw new NotImplementedException();
     }
 
 
@@ -391,6 +387,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean inneholder(T verdi)
     {
         return indeksTil(verdi) != -1;
+    }
+
+
+    ////////////////oppgave 5////////////////////////
+    @Override
+    public void leggInn(int indeks, T verdi)
+    {
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+
+        indeksKontroll(indeks, true);
+
+        if (tom())                              // tom liste
+        {
+            hode = hale = new Node<>(verdi, null, null);
+        }
+        else if (indeks == 0)                   // ny verdi forrest
+        {
+            hode = hode.forrige = new Node<>(verdi, null, hode);
+        }
+        else if (indeks == antall)              // ny verdi bakerst
+        {
+            hale = hale.neste = new Node<>(verdi, hale, null);
+        }
+        else                                    // ny verdi på plass indeks
+        {
+            Node<T> p = finnNode(indeks);     // ny verdi skal til venstre for p
+            p.forrige = p.forrige.neste = new Node<>(verdi, p.forrige, p);
+        }
+
+        antall++;            // ny verdi i listen
+        endringer++;   // en endring i listen
     }
 
 } // class DobbeltLenketListe
