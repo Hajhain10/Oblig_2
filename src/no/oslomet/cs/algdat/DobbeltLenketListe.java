@@ -8,15 +8,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
-
 import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 
-
+////////////Oppgave1///////////////////////////////////
 public class DobbeltLenketListe<T> implements Liste<T> {
 
     /**
@@ -118,7 +113,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return subliste;
     }
 
-
     @Override
     public int antall() {
         return antall;
@@ -162,21 +156,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new NotImplementedException();
     }
 
-    @Override
-    public boolean inneholder(T verdi) {
-        throw new NotImplementedException();
-    }
 
     @Override
     public T hent(int indeks) {
 
         indeksKontroll(indeks,false);
         return finnNode(indeks).verdi;
-    }
-
-    @Override
-    public int indeksTil(T verdi) {
-        throw new NotImplementedException();
     }
 
     ////////////////Oppgave 3a///////////////
@@ -240,7 +225,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 */
     }
-
+///////////////Oppgave2/////////////////////////
     @Override
     public String toString() {
         if (tom()){
@@ -386,8 +371,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
+    //////////////////Oppgave4/////////////////////
+    @Override
+    public int indeksTil(T verdi)
+    {
+        if (verdi == null) return -1;
 
+        Node<T> p = hode;
 
+        for (int indeks = 0; indeks < antall; indeks++, p = p.neste)
+        {
+            if (p.verdi.equals(verdi)) return indeks;
+        }
+
+        return -1;
+    }
+
+    @Override
+    public boolean inneholder(T verdi)
+    {
+        return indeksTil(verdi) != -1;
+    }
 
 } // class DobbeltLenketListe
 
