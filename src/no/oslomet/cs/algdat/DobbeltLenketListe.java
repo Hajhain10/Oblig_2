@@ -317,7 +317,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove(){
-         /* //oppgave 9
+          //oppgave 9
 
            if(!fjernOK){
               throw new IllegalStateException();
@@ -328,30 +328,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             fjernOK = false;
              Node <T> p = null;
 
-            if (antall == 1)    // bare en node i listen
+            if (antall == 1)    // Når det bare er en node i listen
             {
-                hode = hale = null;
+                hode = null;
+                hale = null;
             }
-           else if(denne == null){
-             hale= denne.forrige;
-             p=denne.forrige;
-             p.neste=null;
+           else if(denne == null){ // Når du skal fjerne den siste
+               hale = hale.forrige;
+               hale.neste = null;
             }
-           else if(denne.forrige==hode){
-                hode=denne;
-                p=denne;
-                p.forrige=null;
+           else if(denne.forrige==hode){ // Når du skal fjerne den første
+
+               hode=denne;
+               hode.forrige = null;
             }
            else{
-                p = denne.forrige;  // p skal fjernes
+               //Når du skal fjerne noden som ligger mellom hode og hale
+                p = denne.forrige;
                 p.forrige.neste = p.neste;
                 p.neste.forrige = p.forrige;
             }
 
            iteratorendringer++;
            endringer++;
-           antall--;*/
-            throw new NotImplementedException();
+           antall--;
+            //throw new NotImplementedException();
         }
 
     } // class DobbeltLenketListeIterator
