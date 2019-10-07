@@ -726,6 +726,7 @@ class DobbeltLenketListeTest {
                 || liste.fjern("G") == true
                 || liste.fjern("J") == true) {
             antallFeil++;
+            System.out.println("test");
             System.out.println("Oppgave 6ka: Feil returverdi i metoden fjern(T)!");
         }
 
