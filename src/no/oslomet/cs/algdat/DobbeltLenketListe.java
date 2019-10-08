@@ -258,7 +258,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         start.forrige = null;
         hode.verdi = null;
         antall = 0;
-        System.out.println(hale.verdi +"  "+ hode.verdi);
 
         /*
         {
@@ -311,7 +310,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         ut+="]";
         return ut;
     }
-////////////////oppgave 8 //////////////
 
     @Override
     public Iterator<T> iterator() {
@@ -319,8 +317,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return new DobbeltLenketListeIterator();
     }
 
-    public Iterator<T> iterator(int indeks)
-    {
+    public Iterator<T> iterator(int indeks) {
         indeksKontroll(indeks, false);
         return new DobbeltLenketListeIterator(indeks);
     }
@@ -331,29 +328,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private boolean fjernOK;
         private int iteratorendringer;
 
-        private DobbeltLenketListeIterator()
-        {
-            denne = hode;     // p starter på den første i listen
-            fjernOK = false;  // blir sann når next() kalles
-            iteratorendringer = endringer;  // teller endringer
+        private DobbeltLenketListeIterator(){
+            denne = hode;  //p starter på den første i listen
+            fjernOK = false; // blir sann når next() kalles
+            iteratorendringer = endringer; // teller endringer
+            //throw new NotImplementedException();
         }
 
-        private DobbeltLenketListeIterator(int indeks)
-        {
+        private DobbeltLenketListeIterator(int indeks){
             denne = finnNode(indeks);  // noden med oppgitt indeks;
             fjernOK = false;  // blir sann når next() kalles
             iteratorendringer = endringer;  // teller endringer
+            //throw new NotImplementedException();
         }
 
         @Override
-        public boolean hasNext()
-        {
+        public boolean hasNext(){
             return denne != null;
+            //throw new NotImplementedException();
+
         }
 
         @Override
-        public T next()
-        {
+        public T next(){
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
 
             if (endringer != iteratorendringer)
@@ -366,9 +363,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
             return tempverdi;
         }
-
-        //////Oppgave 9//////
-
+            //////Oppgave 9//////
         @Override
         public void remove(){
            if(!fjernOK){
@@ -489,18 +484,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall++;            // ny verdi i listen
         endringer++;   // en endring i listen
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 } // class DobbeltLenketListe
 
