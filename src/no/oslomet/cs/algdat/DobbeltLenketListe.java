@@ -2,6 +2,8 @@ package no.oslomet.cs.algdat;
 
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.*;
 
 
@@ -120,43 +122,57 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return ut.toString();
     }
 
-    ////////////////// Oppgave3a //////////////////////////////
+    ////////////////// Oppgave3 //////////////////////////////
     private Node<T> finnNode(int indeks){
 
-        // Hvis indeks er større starter vi ved hode
+        //Hvis indeksen er mindre enn antall/2
+        // starter vi fra hode
         if(indeks <= (antall/2)){
+            //Starter fra hode også går vi til neste
             Node p = hode;
+
+            //For loop som går til neste
             for(int i =0; i < indeks; i++){
                 p = p.neste;
             }
             return p;
         }
 
-        // Hvis indeks er mindre starter vi ved halen
+        // Hvis indeks er større enn antall/2 starter vi ved halen
         else{
+            //Starter fra halen
             Node q = hale;
+
             int tmp = antall - indeks;
+
+            //For loop som går til forrige
             for(int i = antall; i <= tmp; i--){
                 q = q.forrige;
             }
             return q;
         }
-
     }
 
     ////////////////// Oppgave3a //////////////////////////////
     @Override
     public T hent(int indeks) {
 
+        //Kontrollerer ideksen
         indeksKontroll(indeks,false);
+
+        //Returnerer verdien til finnNode
         return finnNode(indeks).verdi;
     }
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
+
+        //Kaster en Exception hvis verdien er lik null
         if(nyverdi == null){
-            throw new NullPointerException("Ny verdi kan ikke være null");
+            throw new NullPointerException("Ny verdi kan ikke være lik null");
         }
+
+        //Skjekker indeksen
         indeksKontroll(indeks, false);
 
         Node p = finnNode(indeks);
@@ -295,27 +311,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Med Iterator kan vi kalle på hasNext() metoden
         Iterator<T> iterator = iterator();
 
-        //Fjerner nullverdier
-        if(iterator == null){
-
-            while(iterator.hasNext()){
-
-                if(iterator.next() == null){
-                    iterator.remove();
-                    return true;
-                }
-            }
-        }
-
-        else {
-            while (iterator.hasNext()){
+            while (iterator.hasNext()==true){
 
                 if(verdi.equals(iterator.next())){
                     iterator.remove();
                     return true;
                 }
             }
-        }
 
         endringer++;
         return false;
@@ -353,8 +355,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 nodeForan.neste.forrige = nodeForan;
 
             }
-
-
         }
 
         antall--;
@@ -488,11 +488,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 p.forrige.neste = p.neste;
                 p.neste.forrige = p.forrige;
             }
-
             iteratorendringer++;
             endringer++;
             antall--;
-            //throw new NotImplementedException();
         }
     } // class DobbeltLenketListeIterator
 
