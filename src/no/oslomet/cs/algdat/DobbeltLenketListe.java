@@ -356,11 +356,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public void remove(){
           //oppgave 9
-
            if(!fjernOK){
               throw new IllegalStateException();
           }
-           if(endringer != antall){
+           if(endringer != iteratorendringer){
                new ConcurrentModificationException();
            }
             fjernOK = false;
@@ -376,7 +375,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                hale.neste = null;
             }
            else if(denne.forrige==hode){ // Når du skal fjerne den første
-
                hode=denne;
                hode.forrige = null;
             }
