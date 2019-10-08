@@ -385,7 +385,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         start.forrige.neste = null;
         start.forrige = null;
         hode.verdi = null;
-        //antall er naa null
+        //antall er naa lik 0
         antall = 0;
 /*
         {
