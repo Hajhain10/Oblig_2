@@ -146,6 +146,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return finnNode(indeks).verdi;
     }
 
+    @Override
+    public T oppdater(int indeks, T nyverdi) {
+        if(nyverdi == null){
+            throw new NullPointerException("Ny verdi kan ikke være null");
+        }
+        indeksKontroll(indeks, false);
+
+        Node p = finnNode(indeks);
+        T gammel = (T) p.verdi;
+
+        p.verdi = nyverdi;
+        endringer++;
+        return gammel;
+
+    }
+
     ////////////////// Oppgave3b //////////////////////////////
     private void fratilKontroll(int fra, int til, int antall){
         if(fra < 0){
@@ -229,10 +245,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return -1;
     }
 
-    @Override
-    public T oppdater(int indeks, T verdi) {
-        return null;
-    }
 
     @Override
     public boolean inneholder(T verdi)
@@ -274,31 +286,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     ////////////////// Oppgave6 //////////////////////////////
     @Override
     public boolean fjern(T verdi) {
-
         //Med Iterator kan vi kalle på hasNext() metoden
-        Iterator<T> tmp = iterator();
+        Iterator<T> iterator = iterator();
 
         //Fjerner nullverdier
-        if(tmp == null){
+        if(iterator == null){
 
-            while(tmp.hasNext()){
+            while(iterator.hasNext()){
 
-                if(tmp.next() == null){
-                    tmp.remove();
+                if(iterator.next() == null){
+                    iterator.remove();
                     return true;
                 }
             }
         }
 
         else {
-            while (tmp.hasNext()){
+            while (iterator.hasNext()){
 
-                if(tmp == tmp.next()){
-                    tmp.remove();
+                if(verdi.equals(iterator.next())){
+                    iterator.remove();
                     return true;
                 }
             }
         }
+
+        endringer++;
         return false;
     }
 
@@ -309,12 +322,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         T midlertidig;
 
         if(indeks == 0){
+
             midlertidig = hode.verdi;
 
-            hode = hode.neste;
-            if(antall == 1){
-                hale = null;
+            if(antall==1){
+                hode = hale = null;
+            }else {
+                hode = hode.neste;
+                hode.forrige = null;
             }
+
         }
         else {
             Node<T> nodeForan = finnNode((indeks - 1));
@@ -322,13 +339,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             midlertidig = fjernNode.verdi;
 
             if(fjernNode == hale){
-                hale = fjernNode.forrige;
+                hale = hale.forrige;
+                hale.neste = null;
+            }
+            else {
+                nodeForan.neste = fjernNode.neste;
+                nodeForan.neste.forrige = nodeForan;
+
             }
 
-            nodeForan.neste = fjernNode.neste;
+
         }
 
         antall--;
+        endringer++;
         return midlertidig;
     }
 
@@ -349,7 +373,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         start.forrige = null;
         hode.verdi = null;
         antall = 0;
-        System.out.println(hale.verdi +"  "+ hode.verdi);
 
         /*
         {
