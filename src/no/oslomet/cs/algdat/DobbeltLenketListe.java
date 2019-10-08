@@ -80,15 +80,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     ////////////////// Oppgave2 //////////////////////////////
     @Override
     public String toString() {
+        //sjekker om listen er tom
         if (tom()){
             return "[]";
-        }else if(hode.verdi == null){
+        }
+        //dersom hode eller halens verdi er null så er listen tom
+        else if(hode.verdi == null){
             return "[]";
         }
-
+        //starter på hode
         Node forste = hode;
         StringBuilder ut = new StringBuilder("["+forste.verdi);
         forste = forste.neste;
+        //fortsetter lokken til forste ikke er null
         while(forste != null){
             ut.append(", "+forste.verdi);
             forste = forste.neste;
@@ -98,20 +102,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public String omvendtString() {
+        //sjekker om listen er tom
         if (tom()){
             return "[]";
         }else if(hode.verdi == null){
             return "[]";
         }
+        //starter på halen
         Node sist = hale;
-        String ut = "["+sist.verdi;
+        StringBuilder ut = new StringBuilder("["+sist.verdi);
         sist = sist.forrige;
         while(sist != null){
-            ut+=", "+sist.verdi;
+            ut.append(", "+sist.verdi);
             sist = sist.forrige;
         }
-        ut+="]";
-        return ut;
+        ut.append("]");
+        return ut.toString();
     }
 
     ////////////////// Oppgave3a //////////////////////////////
@@ -355,39 +361,45 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer++;
         return midlertidig;
     }
-
+    ///////////////Oppgave 7/////////////////
     @Override
     public void nullstill() {
+
         Node start = hode;
         start.verdi = null;
         start = start.neste;
+        //Dersom start.neste ikke er null så går vi videre i listen
         while(start.neste!=null){
+            //setter alle pekerne og dens verdi til null
             start.forrige.neste = null;
             start.forrige = null;
             start.verdi = null;
+            //går til neste node i listem
             start = start.neste;
+            //oker endringer
             endringer++;
         }
+        //setter alle pekerne og deres verdi til null for den
+        //siste noden
         start.verdi = null;
         start.forrige.neste = null;
         start.forrige = null;
         hode.verdi = null;
+        //antall er naa null
         antall = 0;
-
-        /*
+/*
         {
+        //Virket som om den ovre algoritmen var raskere enn denne
             Node starten = hode;
-            int hjelpeverdi = 0;
-            while(starten.neste!=null){
-                fjern(hjelpeverdi);
-                hjelpeverdi++;
-                endringer++;
+            starten.verdi = null;
+            //gaar igjennom alle verdiene og nuller dem
+            for(int i =0; i<=antall; i++){
+                fjern(i);
             }
-            fjern(hjelpeverdi);
-            hode.verdi = null;
+            //setter antall lik 0
             antall = 0;
         }
-        */
+*/
     }
 
     ////////////////// Oppgave8 //////////////////////////////
