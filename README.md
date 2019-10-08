@@ -11,8 +11,8 @@ Oppgaven er levert av følgende studenter:
 # Arbeidsfordeling
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
-* Jawid Mohammadi: Hovedansvar for 4,
-* Rahmat Faribarz: Hovedansvar for 
+* Jawid Mohammadi: Hovedansvar for 4,10
+* Rahmat Faribarz: Hovedansvar for 5,8
 * Danan Subramaniam: Hovedansvar for 3,6
 * Hajhain Nirmalan: Hovedansvar for 2,7
 * Mohamed Yusuf Nur: Hovedansvar for 1,9
