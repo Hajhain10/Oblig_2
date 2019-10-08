@@ -714,7 +714,7 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 6i: Feil i fjern(indeks)-metoden!");
         }
 
-        if (!liste.omvendtString().equals("[F, E, C, B]")) {
+        if (!liste.omvendtString().equals("[F, E, C, B]")) {System.out.println(liste.omvendtString());
             antallFeil++;
             System.out.println("Oppgave 6j: Feil i fjern(indeks)-metoden!");
         }
