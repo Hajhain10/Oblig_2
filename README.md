@@ -15,4 +15,4 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Rahmat Faribarz: Hovedansvar for 
 * Danan Subramaniam: Hovedansvar for 3,6
 * Hajhain Nirmalan: Hovedansvar for 2,7
-* Mohamed Yusuf Nur: Hovedansvar for 
+* Mohamed Yusuf Nur: Hovedansvar for 1,9

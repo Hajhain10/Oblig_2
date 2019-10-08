@@ -352,10 +352,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         public T next(){
             throw new NotImplementedException();
         }
-
+            //////Oppgave 9//////
         @Override
         public void remove(){
-          //oppgave 9
            if(!fjernOK){
               throw new IllegalStateException();
           }
