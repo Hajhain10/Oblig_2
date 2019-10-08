@@ -6,10 +6,7 @@ package no.oslomet.cs.algdat;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 
 ////////////Oppgave1///////////////////////////////////
@@ -314,14 +311,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         ut+="]";
         return ut;
     }
+////////////////oppgave 8 //////////////
 
     @Override
     public Iterator<T> iterator() {
+
         return new DobbeltLenketListeIterator();
     }
 
-    public Iterator<T> iterator(int indeks) {
-        throw new NotImplementedException();
+    public Iterator<T> iterator(int indeks)
+    {
+        indeksKontroll(indeks, false);
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>
@@ -330,29 +331,44 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private boolean fjernOK;
         private int iteratorendringer;
 
-        private DobbeltLenketListeIterator(){
-            denne = hode;  //p starter på den første i listen
-            fjernOK = false; // blir sann når next() kalles
-            iteratorendringer = endringer; // teller endringer
-            //throw new NotImplementedException();
+        private DobbeltLenketListeIterator()
+        {
+            denne = hode;     // p starter på den første i listen
+            fjernOK = false;  // blir sann når next() kalles
+            iteratorendringer = endringer;  // teller endringer
         }
 
-        private DobbeltLenketListeIterator(int indeks){
-            throw new NotImplementedException();
+        private DobbeltLenketListeIterator(int indeks)
+        {
+            denne = finnNode(indeks);  // noden med oppgitt indeks;
+            fjernOK = false;  // blir sann når next() kalles
+            iteratorendringer = endringer;  // teller endringer
         }
 
         @Override
-        public boolean hasNext(){
+        public boolean hasNext()
+        {
             return denne != null;
-            //throw new NotImplementedException();
-
         }
 
         @Override
-        public T next(){
-            throw new NotImplementedException();
+        public T next()
+        {
+            if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
+
+            if (endringer != iteratorendringer)
+                throw new ConcurrentModificationException("Listen er endret!");
+
+            T tempverdi = denne.verdi;
+            denne = denne.neste;
+
+            fjernOK = true;
+
+            return tempverdi;
         }
-            //////Oppgave 9//////
+
+        //////Oppgave 9//////
+
         @Override
         public void remove(){
            if(!fjernOK){
@@ -473,6 +489,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall++;            // ny verdi i listen
         endringer++;   // en endring i listen
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 } // class DobbeltLenketListe
 
