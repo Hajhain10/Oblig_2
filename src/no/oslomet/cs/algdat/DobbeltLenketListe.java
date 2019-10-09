@@ -1,6 +1,6 @@
 package no.oslomet.cs.algdat;
 
-////////////////// class DobbeltLenketListe //////////////////////////////
+////////////////// class DobbeltLenketListe /////////////////////////////
 /**
  * Jawid Mohammadi, S315591, s315591@oslomet.no
  * Rahmat Faribarz, s235799, s235799@oslomet.no
