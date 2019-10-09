@@ -2,8 +2,6 @@ package no.oslomet.cs.algdat;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DobbeltLenketListeTest {
 
     ////// Oppgave 1 /////////////////////
@@ -1298,5 +1296,4 @@ class DobbeltLenketListeTest {
             antallFeil++;
         }
     }
-
 }
