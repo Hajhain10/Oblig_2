@@ -541,6 +541,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c)
     {
         for (int n = liste.antall(); n > 0; n--)
+        //går igjennom elementene i lista
         {
             int m = 0;
             Iterator<T> iterator = liste.iterator();
@@ -549,13 +550,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             for (int i = 1; i < n; i++)
             {
                 T verdi = iterator.next();
+                //sammenlikner menverdi og verdi
+                //minverdi vil inneholde minste verdi og dens indeks
                 if (c.compare(minverdi,verdi) > 0)
                 {
                     minverdi = verdi;
                     m = i;
                 }
             }
+            //fjerner minverdi fra listen
             liste.fjern(minverdi);
+            //legger til minverdi i slutten av listen
             liste.leggInn(minverdi);
         }
     }
