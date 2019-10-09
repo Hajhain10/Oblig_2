@@ -1,6 +1,13 @@
 package no.oslomet.cs.algdat;
 
 ////////////////// class DobbeltLenketListe //////////////////////////////
+/**
+ * Jawid Mohammadi, S315591, s315591@oslomet.no
+ * Rahmat Faribarz, s235799, s235799@oslomet.no
+ * Danan Subramaniam, S321422, s321422@oslomet.no
+ * Hajhain Nirmalan, S331425, s331425@oslomet.no
+ * Mohamed Yusuf Nur, S333725, s333725@oslomet.no
+ */
 
 import java.util.*;
 
