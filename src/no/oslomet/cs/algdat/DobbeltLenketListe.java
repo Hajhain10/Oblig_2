@@ -2,8 +2,6 @@ package no.oslomet.cs.algdat;
 
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.*;
 
 
@@ -499,20 +497,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     {
         for (int n = liste.antall(); n > 0; n--)
         {
-            Iterator<T> iterator = liste.iterator();
             int m = 0;
+            Iterator<T> iterator = liste.iterator();
+
             T minverdi = iterator.next();
             for (int i = 1; i < n; i++)
             {
                 T verdi = iterator.next();
-                if (c.compare(verdi,minverdi) < 0)
+                if (c.compare(minverdi,verdi) > 0)
                 {
-                    m = i; minverdi = verdi;
+                    minverdi = verdi;
+                    m = i;
                 }
             }
-            liste.leggInn(liste.fjern(m));
+            liste.fjern(minverdi);
+            liste.leggInn(minverdi);
         }
     }
 } // class DobbeltLenketListe
+
 
 
